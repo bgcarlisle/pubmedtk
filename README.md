@@ -3,6 +3,18 @@
 "Pubmed toolkit," an R package that provides functions for downloading
 data via the Pubmed API and interpreting them.
 
+## Installing
+
+This package is not currently on CRAN (maybe later) and so if you want
+to use it, you will have to do so via `devtools`:
+
+```
+install.packages("devtools")
+library(devtools)
+install_github("bgcarlisle/pubmedtk")
+library(pubmedtk)
+```
+
 ## Pubmed API
 
 You will need a Pubmed API key to access the Pubmed API. This is a
