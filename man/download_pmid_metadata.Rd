@@ -4,12 +4,12 @@
 \alias{download_pmid_metadata}
 \title{Downloads metadata from Pubmed API for provided PMID's}
 \usage{
-download_pmid_metadata(df, col, api_key)
+download_pmid_metadata(df, column, api_key)
 }
 \arguments{
 \item{df}{A dataframe containing a column of PMID's}
 
-\item{col}{The name of the column containing PMID's}
+\item{column}{The name of the column containing PMID's}
 
 \item{api_key}{A valid Pubmed API key}
 }

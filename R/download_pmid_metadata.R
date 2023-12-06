@@ -2,7 +2,7 @@
 #'
 #' @param df A dataframe containing a column of PMID's
 #'
-#' @param col The name of the column containing PMID's
+#' @param column The name of the column containing PMID's
 #'
 #' @param api_key A valid Pubmed API key
 #'
@@ -33,15 +33,15 @@
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 
-download_pmid_metadata <- function(df, col, api_key) {
+download_pmid_metadata <- function(df, column, api_key) {
     
     out <- tryCatch({
 
         ## Check that the column exists in the supplied df
         assertthat::assert_that(
-                        col %in% colnames(df),
+                        column %in% colnames(df),
                         msg = paste(
-                            "Column", col,
+                            "Column", column,
                             "is not present in supplied data frame"
                         )
                     )
@@ -72,9 +72,9 @@ download_pmid_metadata <- function(df, col, api_key) {
         ## Pull out the well formed PMID's to be checked
         pmids <- df %>%
             dplyr::filter(
-                grepl("^[0-9]+\\.?[0-9]+$", !!dplyr::sym(col))
+                grepl("^[0-9]+\\.?[0-9]+$", !!dplyr::sym(column))
             ) %>%
-            dplyr::pull(col)
+            dplyr::pull(column)
 
         ## Add the new columns
         df$pubmed_dl_success <- as.logical(NA)
