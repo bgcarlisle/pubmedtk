@@ -5,9 +5,40 @@
 #'
 #' @param api_key A valid Pubmed API key
 #'
+#' @return A named list with 5 elements:
+#'
+#'     `$pubmed_dl_success`, which is TRUE in the case that a
+#'     corresponding Pubmed record was found and metadata
+#'     downloaded and FALSE otherwise.
+#'
+#'     `$doi`, a character string containing the DOI for the
+#'     publication with the PMID in question.
+#'
+#'     `$languages`, a JSON-encoded list of languages corresponding to
+#'     the publication with the PMID in question.
+#'
+#'     `$pubtypes`, a JSON-encoded list of publication types
+#'     corresponding to the publication with the PMID in question.
+#'
+#'     `$authors`, a JSON-encoded list of authors of the publication
+#'     with the PMID in question.
+#'
 #' @export
 #'
 #' @importFrom magrittr %>%
+#'
+#' @examples
+#'
+#' \dontrun{
+#' ## Read in API key
+#' ak <- readLines("api_key.txt")
+#'
+#' ## Download Pubmed metadata
+#' mdata <- download_one_pmid_metadata("29559429", ak)
+#'
+#' ## Extract first author
+#' jsonlite::fromJSON(mdata$authors)[1]
+#' }
 
 download_one_pmid_metadata <- function(pmid, api_key) {
     

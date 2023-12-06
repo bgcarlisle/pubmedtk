@@ -2,7 +2,8 @@
 % Please edit documentation in R/download_pmid_metadata.R
 \name{download_pmid_metadata}
 \alias{download_pmid_metadata}
-\title{Downloads metadata from Pubmed API for provided PMID's}
+\title{Downloads metadata from Pubmed API for a column of PMID's in a data
+frame}
 \usage{
 download_pmid_metadata(df, column, api_key)
 }
@@ -38,5 +39,39 @@ for the article in question.
 }\if{html}{\out{</div>}}
 }
 \description{
-Downloads metadata from Pubmed API for provided PMID's
+Downloads metadata from Pubmed API for a column of PMID's in a data
+frame
+}
+\examples{
+
+\dontrun{
+## Read in API key
+ak <- readLines("api_key.txt")
+
+## Example publications and their corresponding PMID's (some valid
+## and some not)
+pubs <- tibble::tribble(
+  ~pmid,
+  "29559429",
+  "28837722",
+  NA,
+  "borp",
+  "98472657638729"
+)
+
+## Download Pubmed metadata
+pm_meta <- download_pmid_metadata(pubs, "pmid", ak)
+
+## Extract DOI's for those that were successfully downloaded
+pm_meta \%>\%
+  dplyr::filter(pubmed_dl_success)
+  dplyr::select(pmid, doi)
+
+## A tibble: 2 × 2
+##   pmid     doi                    
+##   <chr>    <chr>                  
+## 1 29559429 10.1136/bmj.k959       
+## 2 28837722 10.1001/jama.2017.11502
+
+}
 }

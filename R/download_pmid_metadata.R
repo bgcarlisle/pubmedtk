@@ -1,4 +1,5 @@
-#' Downloads metadata from Pubmed API for provided PMID's
+#' Downloads metadata from Pubmed API for a column of PMID's in a data
+#' frame
 #'
 #' @param df A dataframe containing a column of PMID's
 #'
@@ -32,6 +33,39 @@
 #'
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
+#'
+#' @examples
+#'
+#' \dontrun{
+#' ## Read in API key
+#' ak <- readLines("api_key.txt")
+#'
+#' ## Example publications and their corresponding PMID's (some valid
+#' ## and some not)
+#' pubs <- tibble::tribble(
+#'   ~pmid,
+#'   "29559429",
+#'   "28837722",
+#'   NA,
+#'   "borp",
+#'   "98472657638729"
+#' )
+#'
+#' ## Download Pubmed metadata
+#' pm_meta <- download_pmid_metadata(pubs, "pmid", ak)
+#'
+#' ## Extract DOI's for those that were successfully downloaded
+#' pm_meta %>%
+#'   dplyr::filter(pubmed_dl_success)
+#'   dplyr::select(pmid, doi)
+#'
+#' ## A tibble: 2 × 2
+#' ##   pmid     doi                    
+#' ##   <chr>    <chr>                  
+#' ## 1 29559429 10.1136/bmj.k959       
+#' ## 2 28837722 10.1001/jama.2017.11502
+#' 
+#' }
 
 download_pmid_metadata <- function(df, column, api_key) {
     

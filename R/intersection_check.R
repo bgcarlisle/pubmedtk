@@ -30,6 +30,30 @@
 #'
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
+#'
+#' @examples
+#'
+#' \dontrun{
+#' ## Read in API key
+#' ak <- readLines("api_key.txt")
+#'
+#' ## Example publications and their corresponding PMID's (some valid
+#' ## and some not)
+#' pubs <- tibble::tribble(
+#'   ~pmid,
+#'   "29559429",
+#'   "28837722",
+#'   "28961465",
+#'   "32278621",
+#'   "one hundred of them",
+#'   "28837722",
+#'   "28961465"
+#' )
+#'
+#' ## Check which ones were authored by Carlisle:
+#' intersection_check(pubs, "pmid", "Carlisle[Author]", ak)
+#' 
+#' }
 
 intersection_check <- function (
                                 df,

@@ -12,7 +12,40 @@ download_one_pmid_metadata(pmid, api_key)
 
 \item{api_key}{A valid Pubmed API key}
 }
+\value{
+A named list with 5 elements:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{`$pubmed_dl_success`, which is TRUE in the case that a
+corresponding Pubmed record was found and metadata
+downloaded and FALSE otherwise.
+
+`$doi`, a character string containing the DOI for the
+publication with the PMID in question.
+
+`$languages`, a JSON-encoded list of languages corresponding to
+the publication with the PMID in question.
+
+`$pubtypes`, a JSON-encoded list of publication types
+corresponding to the publication with the PMID in question.
+
+`$authors`, a JSON-encoded list of authors of the publication
+with the PMID in question.
+}\if{html}{\out{</div>}}
+}
 \description{
 Downloads metadata from Pubmed API for a single provided PMID and
 exports
+}
+\examples{
+
+\dontrun{
+## Read in API key
+ak <- readLines("api_key.txt")
+
+## Download Pubmed metadata
+mdata <- download_one_pmid_metadata("29559429", ak)
+
+## Extract first author
+jsonlite::fromJSON(mdata$authors)[1]
+}
 }
