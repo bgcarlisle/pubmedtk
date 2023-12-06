@@ -2,5 +2,6 @@
 
 export(download_one_pmid_metadata)
 export(download_pmid_metadata)
+export(intersection_check)
 importFrom(magrittr,"%>%")
 importFrom(rlang,.data)
