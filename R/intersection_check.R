@@ -221,7 +221,7 @@ intersection_check <- function (
         }
 
         out <- df %>%
-            dplyr::left_join(pmids)
+            dplyr::left_join(pmids, by=column)
         
     },
     error=function(cond) {
