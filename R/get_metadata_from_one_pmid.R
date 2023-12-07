@@ -14,14 +14,14 @@
 #'     `$doi`, a character string containing the DOI for the
 #'     publication with the PMID in question.
 #'
-#'     `$languages`, a JSON-encoded list of languages corresponding to
-#'     the publication with the PMID in question.
+#'     `$languages`, a list of languages corresponding to the
+#'     publication with the PMID in question.
 #'
-#'     `$pubtypes`, a JSON-encoded list of publication types
-#'     corresponding to the publication with the PMID in question.
+#'     `$pubtypes`, a list of publication types corresponding to the
+#'     publication with the PMID in question.
 #'
-#'     `$authors`, a JSON-encoded list of authors of the publication
-#'     with the PMID in question.
+#'     `$authors`, a list of authors of the publication with the PMID
+#'     in question.
 #'
 #' @export
 #'
@@ -37,7 +37,7 @@
 #' mdata <- get_metadata_from_one_pmid("29559429", ak)
 #'
 #' ## Extract first author
-#' jsonlite::fromJSON(mdata$authors)[1]
+#' mdata$authors[1]
 #' }
 
 get_metadata_from_one_pmid <- function(pmid, api_key) {
@@ -97,7 +97,7 @@ get_metadata_from_one_pmid <- function(pmid, api_key) {
         assertthat::assert_that(
                         length(errors) == 0,
                         msg=paste(
-                            "Pubmed download error",
+                            "Pubmed download error:",
                             xml2::xml_text(errors)
                         )
                     )
@@ -129,9 +129,9 @@ get_metadata_from_one_pmid <- function(pmid, api_key) {
         list(
             pubmed_dl_success = TRUE,
             doi = doi,
-            languages = jsonlite::toJSON(languages),
-            pubtypes = jsonlite::toJSON(pubtypes),
-            authors = jsonlite::toJSON(authors)
+            languages = languages,
+            pubtypes = pubtypes,
+            authors = authors
         ) %>%
             return()
                 

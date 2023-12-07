@@ -22,14 +22,14 @@ downloaded and FALSE otherwise.
 `$doi`, a character string containing the DOI for the
 publication with the PMID in question.
 
-`$languages`, a JSON-encoded list of languages corresponding to
-the publication with the PMID in question.
+`$languages`, a list of languages corresponding to the
+publication with the PMID in question.
 
-`$pubtypes`, a JSON-encoded list of publication types
-corresponding to the publication with the PMID in question.
+`$pubtypes`, a list of publication types corresponding to the
+publication with the PMID in question.
 
-`$authors`, a JSON-encoded list of authors of the publication
-with the PMID in question.
+`$authors`, a list of authors of the publication with the PMID
+in question.
 }\if{html}{\out{</div>}}
 }
 \description{
@@ -46,6 +46,6 @@ ak <- readLines("api_key.txt")
 mdata <- get_metadata_from_one_pmid("29559429", ak)
 
 ## Extract first author
-jsonlite::fromJSON(mdata$authors)[1]
+mdata$authors[1]
 }
 }

@@ -146,7 +146,7 @@ get_metadata_from_pmids <- function(df, column, api_key) {
                 dplyr::mutate(
                     languages = ifelse(
                         .data$pmid == id,
-                        pm_metadata$languages,
+                        jsonlite::toJSON(pm_metadata$languages),
                         .data$languages
                     )
                 )
@@ -155,7 +155,7 @@ get_metadata_from_pmids <- function(df, column, api_key) {
                 dplyr::mutate(
                     pubtypes = ifelse(
                         .data$pmid == id,
-                        pm_metadata$pubtypes,
+                        jsonlite::toJSON(pm_metadata$pubtypes),
                         .data$pubtypes
                     )
                 )
@@ -164,7 +164,7 @@ get_metadata_from_pmids <- function(df, column, api_key) {
                 dplyr::mutate(
                     authors = ifelse(
                         .data$pmid == id,
-                        pm_metadata$authors,
+                        jsonlite::toJSON(pm_metadata$authors),
                         .data$authors
                     )
                 )

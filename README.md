@@ -45,16 +45,17 @@ This package provides three functions: `get_metadata_from_one_pmid()`,
 Downloads metadata from the Pubmed API for a single PMID, and returns
 a named list of 5 elements:
 
-1. `$pubmed_dl_success`, which is TRUE in the case that a corresponding
-Pubmed record was found and metadata downloaded and FALSE otherwise.
-2. `$doi`, a character string containing the DOI for the publication with
-the PMID in question.
-3. `$languages`, a JSON-encoded list of languages corresponding to the
+1. `$pubmed_dl_success`, which is TRUE in the case that a
+corresponding Pubmed record was found and metadata downloaded and
+FALSE otherwise.
+2. `$doi`, a character string containing the DOI for the publication
+with the PMID in question.
+3. `$languages`, a list of languages corresponding to the publication
+with the PMID in question.
+4. `$pubtypes`, a list of publication types corresponding to the
 publication with the PMID in question.
-4. `$pubtypes`, a JSON-encoded list of publication types corresponding to
-the publication with the PMID in question.
-5. `$authors`, a JSON-encoded list of authors of the publication with the
-PMID in question.
+5. `$authors`, a list of authors of the publication with the PMID in
+question.
 
 Example:
 
@@ -66,7 +67,7 @@ ak <- readLines("api_key.txt")
 mdata <- get_metadata_from_one_pmid("29559429", ak)
 
 ## Extract first author
-jsonlite::fromJSON(mdata$authors)[1]
+mdata$authors[1]
 ```
 
 ### `get_metadata_from_pmids()`
