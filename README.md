@@ -51,7 +51,7 @@ provided query was searched successfully on Pubmed and FALSE
 otherwise.
 2. `$n_results`, the number of results for the search as reported by
 Pubmed
-3. `pmids`, a list of PMID's corresponding to the Pubmed search
+3. `$pmids`, a list of PMID's corresponding to the Pubmed search
 results for the query provided
 
 Example:

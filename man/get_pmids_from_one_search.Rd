@@ -21,7 +21,7 @@ otherwise.
 `$n_results`, the number of results for the search as reported
 by Pubmed
 
-`pmids`, a list of PMID's corresponding to the Pubmed search
+`$pmids`, a list of PMID's corresponding to the Pubmed search
 results for the query provided
 }\if{html}{\out{</div>}}
 }
