@@ -37,9 +37,9 @@ already been written to disk.
 
 ## Functions provided by `pubmedtk`
 
-This package provides four functions: `get_pmids_from_one_search()`,
-`get_metadata_from_one_pmid()`, `get_metadata_from_pmids()`, and
-`intersection_check()`.
+This package provides five functions: `get_pmids_from_one_search()`,
+`get_pmids_from_searches()`, `get_metadata_from_one_pmid()`,
+`get_metadata_from_pmids()`, and `intersection_check()`.
 
 ### `get_pmids_from_one_search()`
 
@@ -65,6 +65,46 @@ results <- get_pmids_from_one_search("Carlisle B[Author]", ak)
 
 ## Extract first result
 results$pmids[1]
+```
+
+### `get_pmids_from_searches()`
+
+This function downloads PMID results for a column of Pubmed search
+queries in a data frame and returns a data frame containing the
+original columns as well as three additional columns:
+
+1. The `pubmed_search_success` column is TRUE in the case that the
+search rcesults were successfully obtained from Pubmed; FALSE in the
+case that an error occurred in search (e.g. due to a search query that
+is not well-formed).
+2. The `n_results` column contains the number of research results for
+the query provided.
+3. The `pmids` column returns a JSON-encoded list of PMID's for the
+search query provided.
+
+Note that only 10,000 PMID's will be returned if your search has more
+than this number of results.
+
+Example:
+
+```
+library(tidyverse)
+
+## Read in API key
+ak <- readLines("api_key.txt")
+
+## Example Pubmed searches, some valid, some not, some with more than
+## 10k results
+searches <- tribble(
+  ~terms,
+  "Carlisle B[Author]",
+  "NCT00267865",
+  "(Clinical Trial[Publication Type]) AND ((\"2021/01/01\"[Date - Publication] : \"2022/12/31\"[Date - Publication]))",
+  ""
+)
+
+## Download search results
+results <- get_pmids_from_searches(searches, "terms", ak)
 ```
 
 ### `get_metadata_from_one_pmid()`
@@ -127,7 +167,7 @@ ak <- readLines("api_key.txt")
 
 ## Example publications and their corresponding PMID's (some valid and
 ## some not)
-pubs <- tibble::tribble(
+pubs <- tribble(
   ~pmid,
   "28837722",
   NA,
@@ -179,7 +219,7 @@ ak <- readLines("api_key.txt")
 
 ## Example publications and their corresponding PMID's (some valid and
 ## some not)
-pubs <- tibble::tribble(
+pubs <- tribble(
   ~pmid,
   "29559429",
   "28837722",
