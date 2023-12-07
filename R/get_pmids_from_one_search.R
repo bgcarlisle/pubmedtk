@@ -27,13 +27,13 @@
 #' ak <- readLines("api_key.txt")
 #'
 #' ## Download PMID's for search query
-#' results <- get_pmids_from_search("Carlisle B[Author]", ak)
+#' results <- get_pmids_from_one_search("Carlisle B[Author]", ak)
 #'
 #' ## Extract first result
 #' results$pmids[1]
 #' }
 
-get_pmids_from_search <- function (query, api_key) {
+get_pmids_from_one_search <- function (query, api_key) {
 
     out <- tryCatch({
         

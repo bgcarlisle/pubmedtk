@@ -37,10 +37,11 @@ already been written to disk.
 
 ## Functions provided by `pubmedtk`
 
-This package provides four functions: `get_pmids_from_search()`, `get_metadata_from_one_pmid()`,
-`get_metadata_from_pmids()`, and `intersection_check()`.
+This package provides four functions: `get_pmids_from_one_search()`,
+`get_metadata_from_one_pmid()`, `get_metadata_from_pmids()`, and
+`intersection_check()`.
 
-### `get_pmids_from_search()`
+### `get_pmids_from_one_search()`
 
 Returns a named list of PMID's for a provided Pubmed search with 3
 elements:
@@ -60,7 +61,7 @@ Example:
 ak <- readLines("api_key.txt")
 
 ## Download PMID's for search query
-results <- get_pmids_from_search("Carlisle B[Author]", ak)
+results <- get_pmids_from_one_search("Carlisle B[Author]", ak)
 
 ## Extract first result
 results$pmids[1]
