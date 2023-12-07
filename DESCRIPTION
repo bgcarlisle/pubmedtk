@@ -1,6 +1,6 @@
 Package: pubmedtk
 Title: Pubmed toolkit: various functions for interacting with the Pubmed API
-Version: 0.0.0.9000
+Version: 1.0.0
 Authors@R:
     person("Benjamin Gregory", "Carlisle", , "murph@bgcarlisle.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-8975-0649"))
