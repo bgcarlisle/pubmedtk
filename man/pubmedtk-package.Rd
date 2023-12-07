@@ -4,7 +4,7 @@
 \name{pubmedtk-package}
 \alias{pubmedtk}
 \alias{pubmedtk-package}
-\title{pubmedtk: Pubmed toolkit: various functions for interacting with the Pubmed API}
+\title{pubmedtk: Pubmed Toolkit}
 \description{
 Provides various functions for retrieving and interpreting information from Pubmed via the Pubmed API.
 }
