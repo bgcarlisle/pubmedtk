@@ -34,11 +34,37 @@ you can generate one by following these instructions:
    
 For all the examples below, assume that the `api_key.txt` file has
 already been written to disk.
-   
+
 ## Functions provided by `pubmedtk`
 
-This package provides three functions: `get_metadata_from_one_pmid()`,
+This package provides four functions: `get_pmids_from_search()`, `get_metadata_from_one_pmid()`,
 `get_metadata_from_pmids()`, and `intersection_check()`.
+
+### `get_pmids_from_search()`
+
+Returns a named list of PMID's for a provided Pubmed search with 3
+elements:
+
+1. `$pubmed_search_success`, which is TRUE in the case that the
+provided query was searched successfully on Pubmed and FALSE
+otherwise.
+2. `$n_results`, the number of results for the search as reported by
+Pubmed
+3. `pmids`, a list of PMID's corresponding to the Pubmed search
+results for the query provided
+
+Example:
+
+```
+## Read in API key
+ak <- readLines("api_key.txt")
+
+## Download PMID's for search query
+results <- get_pmids_from_search("Carlisle B[Author]", ak)
+
+## Extract first result
+results$pmids[1]
+```
 
 ### `get_metadata_from_one_pmid()`
 
