@@ -127,7 +127,7 @@ get_metadata_from_pmids <- function(df, column, api_key) {
             df <- df %>%
                 dplyr::mutate(
                     pubmed_dl_success = ifelse(
-                        .data$pmid == id,
+                        !!dplyr::sym(column) == id,
                         pm_metadata$pubmed_dl_success,
                         .data$pubmed_dl_success
                     )
@@ -136,7 +136,7 @@ get_metadata_from_pmids <- function(df, column, api_key) {
             df <- df %>%
                 dplyr::mutate(
                     doi = ifelse(
-                        .data$pmid == id,
+                        !!dplyr::sym(column) == id,
                         pm_metadata$doi,
                         .data$doi
                     )
@@ -144,30 +144,42 @@ get_metadata_from_pmids <- function(df, column, api_key) {
 
             df <- df %>%
                 dplyr::mutate(
-                    languages = ifelse(
-                        .data$pmid == id,
-                        jsonlite::toJSON(pm_metadata$languages),
-                        .data$languages
-                    )
-                )
+                           languages = ifelse(
+                               !!dplyr::sym(column) == id,
+                                       ifelse(
+                                           ! is.na(pm_metadata$languages),
+                                           jsonlite::toJSON(pm_metadata$languages),
+                                           NA
+                                       ),
+                               .data$languages
+                           )
+                       )
 
             df <- df %>%
                 dplyr::mutate(
-                    pubtypes = ifelse(
-                        .data$pmid == id,
-                        jsonlite::toJSON(pm_metadata$pubtypes),
-                        .data$pubtypes
-                    )
-                )
+                           pubtypes = ifelse(
+                               !!dplyr::sym(column) == id,
+                                      ifelse(
+                                          ! is.na(pm_metadata$pubtypes),
+                                          jsonlite::toJSON(pm_metadata$pubtypes),
+                                          NA
+                                      ),
+                               .data$pubtypes
+                           )
+                       )
 
             df <- df %>%
                 dplyr::mutate(
-                    authors = ifelse(
-                        .data$pmid == id,
-                        jsonlite::toJSON(pm_metadata$authors),
-                        .data$authors
-                    )
-                )
+                           authors = ifelse(
+                               !!dplyr::sym(column) == id,
+                                     ifelse(
+                                         ! is.na(pm_metadata$authors),
+                                         jsonlite::toJSON(pm_metadata$authors),
+                                         NA
+                                     ),
+                               .data$authors
+                           )
+                       )
             
         }
 
