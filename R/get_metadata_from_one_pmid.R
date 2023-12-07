@@ -34,13 +34,13 @@
 #' ak <- readLines("api_key.txt")
 #'
 #' ## Download Pubmed metadata
-#' mdata <- download_one_pmid_metadata("29559429", ak)
+#' mdata <- get_metadata_from_one_pmid("29559429", ak)
 #'
 #' ## Extract first author
 #' jsonlite::fromJSON(mdata$authors)[1]
 #' }
 
-download_one_pmid_metadata <- function(pmid, api_key) {
+get_metadata_from_one_pmid <- function(pmid, api_key) {
     
     out <- tryCatch({
 

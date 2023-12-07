@@ -52,7 +52,7 @@
 #' )
 #'
 #' ## Download Pubmed metadata
-#' pm_meta <- download_pmid_metadata(pubs, "pmid", ak)
+#' pm_meta <- get_metadata_from_pmids(pubs, "pmid", ak)
 #'
 #' ## Extract DOI's for those that were successfully downloaded
 #' pm_meta %>%
@@ -67,7 +67,7 @@
 #' 
 #' }
 
-download_pmid_metadata <- function(df, column, api_key) {
+get_metadata_from_pmids <- function(df, column, api_key) {
     
     out <- tryCatch({
 
@@ -120,7 +120,7 @@ download_pmid_metadata <- function(df, column, api_key) {
         for (id in pmids) {
 
             ## Download the metadata
-            pm_metadata <- download_one_pmid_metadata(id, api_key)
+            pm_metadata <- get_metadata_from_one_pmid(id, api_key)
 
             ## Apply it to the data frame
 

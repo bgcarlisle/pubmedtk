@@ -37,10 +37,10 @@ already been written to disk.
    
 ## Functions provided by `pubmedtk`
 
-This package provides three functions: `download_one_pmid_metadata()`,
-`download_pmid_metadata()`, and `intersection_check()`.
+This package provides three functions: `get_metadata_from_one_pmid()`,
+`get_metadata_from_pmids()`, and `intersection_check()`.
 
-### `download_one_pmid_metadata()`
+### `get_metadata_from_one_pmid()`
 
 Downloads metadata from the Pubmed API for a single PMID, and returns
 a named list of 5 elements:
@@ -63,13 +63,13 @@ Example:
 ak <- readLines("api_key.txt")
 
 ## Download Pubmed metadata
-mdata <- download_one_pmid_metadata("29559429", ak)
+mdata <- get_metadata_from_one_pmid("29559429", ak)
 
 ## Extract first author
 jsonlite::fromJSON(mdata$authors)[1]
 ```
 
-### `download_pmid_metadata()`
+### `get_metadata_from_pmids()`
 
 Downloads metadata from Pubmed API for a column of PMID's in a data
 frame, and returns a data frame containing the original columns as
@@ -109,7 +109,7 @@ pubs <- tibble::tribble(
 )
 
 ## Download Pubmed metadata
-pm_meta <- download_pmid_metadata(pubs, "pmid", ak)
+pm_meta <- get_metadata_from_pmids(pubs, "pmid", ak)
 
 ## Extract DOI's for those that were successfully downloaded
 pm_meta %>%
