@@ -1,11 +1,12 @@
 Package: pubmedtk
-Title: Pubmed Toolkit
-Version: 1.0.0
+Title: 'Pubmed' Toolkit
+Version: 1.0.1
 Authors@R:
     person("Benjamin Gregory", "Carlisle", , "murph@bgcarlisle.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-8975-0649"))
 Description: Provides various functions for retrieving and
-    interpreting information from Pubmed via the Pubmed API.
+    interpreting information from 'Pubmed' via the API,
+    <https://www.ncbi.nlm.nih.gov/home/develop/api/>.
 License: AGPL (>= 3)
 URL: https://github.com/bgcarlisle/pubmedtk
 BugReports: https://github.com/bgcarlisle/pubmedtk/issues

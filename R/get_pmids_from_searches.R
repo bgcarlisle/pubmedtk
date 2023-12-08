@@ -32,7 +32,7 @@
 #' @examples
 #'
 #' \dontrun{
-#' Read in API key
+#' ## Read in API key
 #' ak <- readLines("api_key.txt")
 #'
 #' ## Example Pubmed searches, some valid, some not, some with more
