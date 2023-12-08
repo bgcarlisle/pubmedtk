@@ -4,9 +4,9 @@
 \name{pubmedtk-package}
 \alias{pubmedtk}
 \alias{pubmedtk-package}
-\title{pubmedtk: Pubmed Toolkit}
+\title{pubmedtk: 'Pubmed' Toolkit}
 \description{
-Provides various functions for retrieving and interpreting information from Pubmed via the Pubmed API.
+Provides various functions for retrieving and interpreting information from 'Pubmed' via the API, \url{https://www.ncbi.nlm.nih.gov/home/develop/api/}.
 }
 \details{
 Pubmed toolkit
