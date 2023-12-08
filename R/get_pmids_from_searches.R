@@ -85,11 +85,20 @@ get_pmids_from_searches <- function (df, column, api_key) {
         queries <- df %>%
             dplyr::pull(column)
 
+        message(
+            paste(
+                length(queries),
+                "queries to be searched"
+            )
+        )
+        
         ## Add the new columns
         df$pubmed_search_success <- as.logical(NA)
         df$n_results <- as.numeric(NA)
         df$pmids <- as.character(NA)
 
+        query_count <- 0
+        
         for (query in queries) {
 
             ## Perform search
@@ -131,6 +140,17 @@ get_pmids_from_searches <- function (df, column, api_key) {
                                
                            )
                        )
+
+            query_count <- query_count + 1
+            
+            prop_done <- round(100 * query_count / length(queries), digits=3)
+
+            message(
+                paste0(
+                    prop_done,
+                    "% done"
+                )
+            )
         }
 
         return(df)

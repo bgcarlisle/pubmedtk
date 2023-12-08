@@ -1,3 +1,10 @@
+# pubmedtk 1.0.2
+
+* Added progress feedback during download for
+  `get_pmids_from_searches()` and `get_metadata_from_pmids()`
+
+---
+
 # pubmedtk 1.0.1
 
 * Fix bug with uncommented instructions in code

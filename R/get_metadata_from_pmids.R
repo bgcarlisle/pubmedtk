@@ -110,6 +110,13 @@ get_metadata_from_pmids <- function(df, column, api_key) {
             ) %>%
             dplyr::pull(column)
 
+        message(
+            paste(
+                length(pmids),
+                "PMID's to check"
+            )
+        )
+
         ## Add the new columns
         df$pubmed_dl_success <- as.logical(NA)
         df$doi <- as.character(NA)
@@ -117,6 +124,8 @@ get_metadata_from_pmids <- function(df, column, api_key) {
         df$pubtypes <- as.character(NA)
         df$authors <- as.character(NA)
 
+        pmid_count <- 0
+        
         for (id in pmids) {
 
             ## Download the metadata
@@ -180,6 +189,17 @@ get_metadata_from_pmids <- function(df, column, api_key) {
                                .data$authors
                            )
                        )
+
+            pmid_count <- pmid_count + 1
+            
+            prop_done <- round(100 * pmid_count / length(pmids))
+
+            message(
+                paste0(
+                    prop_done,
+                    "% done"
+                )
+            )
             
         }
 
