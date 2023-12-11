@@ -8,7 +8,7 @@
 #' @param api_key A valid Pubmed API key
 #'
 #' @return A data frame containing the original columns as well as
-#'     five additional columns:
+#'     seven additional columns:
 #'
 #'     The `pubmed_dl_success` column is TRUE in the case that
 #'     metadata were successfully downloaded from Pubmed; FALSE in the
@@ -25,6 +25,12 @@
 #'
 #'     The `pubtypes` column contains a JSON-encoded list of
 #'     publication types for the article in question.
+#'
+#'     The `pubdate` column contains a character string with the
+#'     publication date
+#'
+#'     The `epubdate` column contains a character string with the
+#'     e-publication date
 #'
 #'     The `authors` column contains a JSON-encoded list of authors
 #'     for the article in question.
@@ -89,6 +95,8 @@ get_metadata_from_pmids <- function(df, column, api_key) {
                                 "doi",
                                 "languages",
                                 "pubtypes",
+                                "pubdate",
+                                "epubdate",
                                 "authors"
                             )
                             %in%
@@ -98,7 +106,7 @@ get_metadata_from_pmids <- function(df, column, api_key) {
                             "The supplied data frame cannot contain",
                             "columns with the following names:",
                             "pubmed_dl_success, doi, languages,",
-                            "pubtypes, authors"
+                            "pubtypes, pubdate, epubdate, authors"
                             
                         )
                     )
@@ -122,6 +130,8 @@ get_metadata_from_pmids <- function(df, column, api_key) {
         df$doi <- as.character(NA)
         df$languages <- as.character(NA)
         df$pubtypes <- as.character(NA)
+        df$pubdate <- as.character(NA)
+        df$epubdate <- as.character(NA)
         df$authors <- as.character(NA)
 
         pmid_count <- 0
@@ -144,12 +154,12 @@ get_metadata_from_pmids <- function(df, column, api_key) {
             
             df <- df %>%
                 dplyr::mutate(
-                    doi = ifelse(
-                        !!dplyr::sym(column) == id,
-                        pm_metadata$doi,
-                        .data$doi
-                    )
-                )
+                           doi = ifelse(
+                               !!dplyr::sym(column) == id,
+                               pm_metadata$doi,
+                               .data$doi
+                           )
+                       )
 
             df <- df %>%
                 dplyr::mutate(
@@ -174,6 +184,24 @@ get_metadata_from_pmids <- function(df, column, api_key) {
                                           NA
                                       ),
                                .data$pubtypes
+                           )
+                       )
+
+            df <- df %>%
+                dplyr::mutate(
+                           pubdate = ifelse(
+                               !!dplyr::sym(column) == id,
+                               pm_metadata$pubdate,
+                               .data$pubdate
+                           )
+                       )
+
+            df <- df %>%
+                dplyr::mutate(
+                           epubdate = ifelse(
+                               !!dplyr::sym(column) == id,
+                               pm_metadata$epubdate,
+                               .data$epubdate
                            )
                        )
 

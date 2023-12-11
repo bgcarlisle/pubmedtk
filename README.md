@@ -116,7 +116,7 @@ results <- get_pmids_from_searches(searches, "terms", ak)
 ### `get_metadata_from_one_pmid()`
 
 Downloads metadata from the Pubmed API for a single PMID, and returns
-a named list of 5 elements:
+a named list of 7 elements:
 
 1. `$pubmed_dl_success`, which is TRUE in the case that a
 corresponding Pubmed record was found and metadata downloaded and
@@ -127,7 +127,9 @@ with the PMID in question.
 with the PMID in question.
 4. `$pubtypes`, a list of publication types corresponding to the
 publication with the PMID in question.
-5. `$authors`, a list of authors of the publication with the PMID in
+5. `$pubdate`, a string containing the publication date.
+6. `$epubdate`, a string containing the e-publication date.
+7. `$authors`, a list of authors of the publication with the PMID in
 question.
 
 Example:
@@ -160,7 +162,9 @@ supplied if one is found, NA otherwise.
 for the article in question.
 4. The `pubtypes` column contains a JSON-encoded list of publication
 types for the article in question.
-5. The `authors` column contains a JSON-encoded list of authors for
+5. The `pubdate` column contains a string of the publication date.
+6. The `epubdate` column contains a string of the e-publication date.
+7. The `authors` column contains a JSON-encoded list of authors for
 the article in question.
 
 Example:

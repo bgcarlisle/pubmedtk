@@ -16,7 +16,7 @@ get_metadata_from_pmids(df, column, api_key)
 }
 \value{
 A data frame containing the original columns as well as
-five additional columns:
+seven additional columns:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{The `pubmed_dl_success` column is TRUE in the case that
 metadata were successfully downloaded from Pubmed; FALSE in the
@@ -33,6 +33,12 @@ languages for the article in question.
 
 The `pubtypes` column contains a JSON-encoded list of
 publication types for the article in question.
+
+The `pubdate` column contains a character string with the
+publication date
+
+The `epubdate` column contains a character string with the
+e-publication date
 
 The `authors` column contains a JSON-encoded list of authors
 for the article in question.

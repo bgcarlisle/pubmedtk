@@ -2,6 +2,9 @@
 
 * Added progress feedback during download for
   `get_pmids_from_searches()` and `get_metadata_from_pmids()`
+* Added `$pubdate` and `$epubdate` download to
+  `get_metadata_from_one_pmid()` and corresponding columns to
+  `get_metadata_from_pmids()`
 
 ---
 
