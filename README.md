@@ -5,8 +5,14 @@ data via the Pubmed API and interpreting them.
 
 ## Installing
 
-This package is not currently on CRAN (maybe later) and so if you want
-to use it, you will have to do so via `devtools`:
+You can install this package via CRAN with the following:
+
+```
+install.packages("pubmedtk")
+```
+
+Or if you want the most up to date version, you can do so via
+`devtools`:
 
 ```
 install.packages("devtools")
