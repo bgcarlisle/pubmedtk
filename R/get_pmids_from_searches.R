@@ -147,8 +147,14 @@ get_pmids_from_searches <- function (df, column, api_key) {
 
             message(
                 paste0(
+                    Sys.time(),
+                    " Done ",
+                    query_count,
+                    " of ",
+                    length(queries),
+                    " (",
                     prop_done,
-                    "% done"
+                    "%)"
                 )
             )
         }

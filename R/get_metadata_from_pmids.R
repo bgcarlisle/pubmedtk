@@ -224,8 +224,14 @@ get_metadata_from_pmids <- function(df, column, api_key) {
 
             message(
                 paste0(
+                    Sys.time(),
+                    " Done ",
+                    pmid_count,
+                    " of ",
+                    length(pmids),
+                    " (",
                     prop_done,
-                    "% done"
+                    "%)"
                 )
             )
             
