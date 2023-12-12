@@ -10,6 +10,10 @@
 #'
 #' @param api_key A valid Pubmed API key
 #'
+#' @param quiet A boolean TRUE or FALSE. If TRUE, no progress messages
+#'     will be printed during download. FALSE by default, messages
+#'     printed for every version downloaded showing progress.
+#'
 #' @return A data frame containing the original columns as well as
 #'     three additional columns:
 #'
@@ -49,7 +53,12 @@
 #' results <- get_pmids_from_searches(searches, "terms", ak)
 #' }
 
-get_pmids_from_searches <- function (df, column, api_key) {
+get_pmids_from_searches <- function (
+                                     df,
+                                     column,
+                                     api_key,
+                                     quiet = FALSE
+                                     ) {
 
     out <- tryCatch({
 
@@ -81,16 +90,27 @@ get_pmids_from_searches <- function (df, column, api_key) {
                         )
                     )
 
+        ## Check that `quiet` is boolean
+        assertthat::assert_that(
+                        quiet == TRUE | quiet == FALSE,
+                        msg = paste(
+                            "The `quiet` argument must be",
+                            "TRUE or FALSE"
+                        )
+                    )
+
         ## Pull out the queries to be searched
         queries <- df %>%
             dplyr::pull(column)
 
-        message(
-            paste(
-                length(queries),
-                "queries to be searched"
+        if (! quiet) {
+            message(
+                paste(
+                    length(queries),
+                    "queries to be searched"
+                )
             )
-        )
+        }
         
         ## Add the new columns
         df$pubmed_search_success <- as.logical(NA)
@@ -145,18 +165,20 @@ get_pmids_from_searches <- function (df, column, api_key) {
             
             prop_done <- round(100 * query_count / length(queries), digits=3)
 
-            message(
-                paste0(
-                    Sys.time(),
-                    " Done ",
-                    query_count,
-                    " of ",
-                    length(queries),
-                    " (",
-                    prop_done,
-                    "%)"
+            if (! quiet) {
+                message(
+                    paste0(
+                        Sys.time(),
+                        " Done ",
+                        query_count,
+                        " of ",
+                        length(queries),
+                        " (",
+                        prop_done,
+                        "%)"
+                    )
                 )
-            )
+            }
         }
 
         return(df)

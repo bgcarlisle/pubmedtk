@@ -7,6 +7,10 @@
 #'
 #' @param api_key A valid Pubmed API key
 #'
+#' @param quiet A boolean TRUE or FALSE. If TRUE, no progress messages
+#'     will be printed during download. FALSE by default, messages
+#'     printed for every version downloaded showing progress.
+#'
 #' @return A data frame containing the original columns as well as
 #'     seven additional columns:
 #'
@@ -73,7 +77,12 @@
 #' 
 #' }
 
-get_metadata_from_pmids <- function(df, column, api_key) {
+get_metadata_from_pmids <- function(
+                                    df,
+                                    column,
+                                    api_key,
+                                    quiet = FALSE
+                                    ) {
     
     out <- tryCatch({
 
@@ -111,6 +120,15 @@ get_metadata_from_pmids <- function(df, column, api_key) {
                         )
                     )
 
+        ## Check that `quiet` is boolean
+        assertthat::assert_that(
+                        quiet == TRUE | quiet == FALSE,
+                        msg = paste(
+                            "The `quiet` argument must be",
+                            "TRUE or FALSE"
+                        )
+                    )
+
         ## Pull out the well formed PMID's to be checked
         pmids <- df %>%
             dplyr::filter(
@@ -118,12 +136,14 @@ get_metadata_from_pmids <- function(df, column, api_key) {
             ) %>%
             dplyr::pull(column)
 
-        message(
-            paste(
-                length(pmids),
-                "PMID's to check"
+        if (! quiet) {
+            message(
+                paste(
+                    length(pmids),
+                    "PMID's to check"
+                )
             )
-        )
+        }
 
         ## Add the new columns
         df$pubmed_dl_success <- as.logical(NA)
@@ -222,18 +242,20 @@ get_metadata_from_pmids <- function(df, column, api_key) {
             
             prop_done <- round(100 * pmid_count / length(pmids))
 
-            message(
-                paste0(
-                    Sys.time(),
-                    " Done ",
-                    pmid_count,
-                    " of ",
-                    length(pmids),
-                    " (",
-                    prop_done,
-                    "%)"
-                )
-            )
+            if (! quiet) {
+                message(
+                    paste0(
+                        Sys.time(),
+                        " Done ",
+                        pmid_count,
+                        " of ",
+                        length(pmids),
+                        " (",
+                        prop_done,
+                        "%)"
+                    )
+                )                
+            }
             
         }
 
