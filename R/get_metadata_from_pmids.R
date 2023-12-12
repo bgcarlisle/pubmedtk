@@ -86,6 +86,16 @@ get_metadata_from_pmids <- function(
     
     out <- tryCatch({
 
+        ## Check that API key is well-formed
+        api_key <- stringr::str_trim(api_key)
+        assertthat::assert_that(
+                        grepl(
+                            "^[0-9a-f]{36}$",
+                            as.character(api_key)
+                        ),
+                        msg="Pubmed API key is not well-formed"
+                    )
+
         ## Check that the column exists in the supplied df
         assertthat::assert_that(
                         column %in% colnames(df),
