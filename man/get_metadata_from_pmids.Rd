@@ -5,7 +5,7 @@
 \title{Downloads metadata from Pubmed API for a column of PMID's in a data
 frame}
 \usage{
-get_metadata_from_pmids(df, column, api_key)
+get_metadata_from_pmids(df, column, api_key, quiet = FALSE)
 }
 \arguments{
 \item{df}{A dataframe containing a column of PMID's}
@@ -13,6 +13,10 @@ get_metadata_from_pmids(df, column, api_key)
 \item{column}{The name of the column containing PMID's}
 
 \item{api_key}{A valid Pubmed API key}
+
+\item{quiet}{A boolean TRUE or FALSE. If TRUE, no progress messages
+will be printed during download. FALSE by default, messages
+printed for every version downloaded showing progress.}
 }
 \value{
 A data frame containing the original columns as well as
