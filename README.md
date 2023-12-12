@@ -67,10 +67,10 @@ Example:
 ak <- readLines("api_key.txt")
 
 ## Download PMID's for search query
-results <- get_pmids_from_one_search("Carlisle B[Author]", ak)
+result <- get_pmids_from_one_search("Carlisle B[Author]", ak)
 
 ## Extract first result
-results$pmids[1]
+result$pmids[1]
 ```
 
 ### `get_pmids_from_searches()`
@@ -190,8 +190,8 @@ pubs <- tribble(
 pm_meta <- get_metadata_from_pmids(pubs, "pmid", ak)
 
 ## Extract DOI's for those that were successfully downloaded
-pm_meta %>%
-  filter(pubmed_dl_success) %>%
+pm_meta |>
+  filter(pubmed_dl_success) |>
   select(pmid, doi)
 
 ## A tibble: 2 × 2
