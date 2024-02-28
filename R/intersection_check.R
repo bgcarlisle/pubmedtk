@@ -147,7 +147,8 @@ intersection_check <- function (
                 dplyr::filter(! .data$pm_checked) %>%
                 utils::head(n=batch_size)
             
-            pmid_search_term <- pmid_batch$pmid %>%
+            pmid_search_term <- pmid_batch %>%
+                dplyr::pull(!!dplyr::sym(column)) %>%
                 paste(collapse="[PMID] OR ") %>%
                 paste0("[PMID]")
 
@@ -185,22 +186,22 @@ intersection_check <- function (
             pmids <- pmids %>%
                 dplyr::mutate(
                     pm_checked = ifelse(
-                        .data$pmid %in% pmid_batch$pmid,
+                        !!dplyr::sym(column) %in% dplyr::pull(pmid_batch, !!dplyr::sym(column)),
                         TRUE,
                         .data$pm_checked
                     )
                 ) %>%
                 dplyr::mutate(
                     found_in_pm_query = ifelse(
-                        .data$pmid %in% found_pmids,
+                        !!dplyr::sym(column) %in% found_pmids,
                         TRUE,
                         .data$found_in_pm_query
                     )
                 ) %>%
                 dplyr::mutate(
                     found_in_pm_query = ifelse(
-                        .data$pmid %in% pmid_batch$pmid &
-                        ! .data$pmid %in% found_pmids,
+                        !!dplyr::sym(column) %in% dplyr::pull(pmid_batch, !!dplyr::sym(column)) &
+                        ! (!!dplyr::sym(column) %in% found_pmids),
                         FALSE,
                         .data$found_in_pm_query
                     )
