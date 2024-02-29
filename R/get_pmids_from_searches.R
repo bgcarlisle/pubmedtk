@@ -170,7 +170,7 @@ get_pmids_from_searches <- function (
             df <- df %>%
                 dplyr::mutate(
                            pmids = ifelse(
-                               !!dplyr::sym(column) == query,
+                               ! is.na(query) & !!dplyr::sym(column) == query,
                                    ifelse(
                                        ! is.na(pm_search_result$pmids),
                                        jsonlite::toJSON(pm_search_result$pmids),
