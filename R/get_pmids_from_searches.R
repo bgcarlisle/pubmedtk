@@ -131,11 +131,21 @@ get_pmids_from_searches <- function (
         
         for (query in queries) {
 
-            ## Perform search
-            pm_search_result <- get_pmids_from_one_search(
-                query,
-                api_key
-            )
+            ## Error checking
+            if (! is.na(query)) {
+                ## Perform search
+                pm_search_result <- get_pmids_from_one_search(
+                    query,
+                    api_key
+                )
+            } else {
+                
+                pm_search_result <- list(
+                    pubmed_search_success = FALSE,
+                    n_results = 0,
+                    pmids = NA
+                )
+            }
 
             ## Apply it to the data frame
 

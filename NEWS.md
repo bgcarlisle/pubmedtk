@@ -2,6 +2,8 @@
 
 * Fixed bug in `intersection_check()` where it would crash if the
   column supplied was not named "pmid"
+* Fixed bug in `get_pmids_from_searches()` where an NA search can
+  cause unexpected results
 
 ---
 
