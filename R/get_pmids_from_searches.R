@@ -152,7 +152,7 @@ get_pmids_from_searches <- function (
             df <- df %>%
                 dplyr::mutate(
                            pubmed_search_success = ifelse(
-                               !!dplyr::sym(column) == query,
+                               ! is.na (query) & !!dplyr::sym(column) == query,
                                pm_search_result$pubmed_search_success,
                                .data$pubmed_search_success
                            )
@@ -161,7 +161,7 @@ get_pmids_from_searches <- function (
             df <- df %>%
                 dplyr::mutate(
                            n_results = ifelse(
-                               !!dplyr::sym(column) == query,
+                               ! is.na(query) & !!dplyr::sym(column) == query,
                                pm_search_result$n_results,
                                .data$n_results
                            )
