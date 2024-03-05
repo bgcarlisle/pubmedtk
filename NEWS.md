@@ -4,6 +4,8 @@
   column supplied was not named "pmid"
 * Fixed bug in `get_pmids_from_searches()` where an NA search can
   cause unexpected results
+* Added `quiet` option to `intersection_check()` to disable progress
+  messages during download
 
 ---
 
