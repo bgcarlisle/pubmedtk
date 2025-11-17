@@ -3,6 +3,10 @@
 "Pubmed toolkit," an R package that provides functions for downloading
 data via the Pubmed API and interpreting them.
 
+This R package is proudly 100% artificial intelligence-free. It does
+not include AI, does not require AI integration, and none of the code
+or documentation was written using AI.
+
 ## Installing
 
 You can install this package via CRAN with the following:
